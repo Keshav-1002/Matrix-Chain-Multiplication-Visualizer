@@ -1,4 +1,5 @@
 from tkinter import *
+import winsound
 
 dims = []
 n = 0
@@ -7,6 +8,15 @@ s = []
 node_radius = 20
 draw_steps = []
 
+def play_click_sound():
+    winsound.Beep(800, 75)
+
+def play_success_sound():
+    winsound.Beep(1000, 150)
+
+def play_error_sound():
+    winsound.Beep(400, 250)
+
 def visualize():
     global dims, n, dp, s, draw_steps
 
@@ -14,6 +24,7 @@ def visualize():
     
     if len(dims_input) < 3:
         cost_label.config(text="Enter at least 3 dimensions!")
+        play_error_sound()
         return
     
     try:
@@ -21,8 +32,10 @@ def visualize():
         
     except:
         cost_label.config(text="Invalid input! Enter integers separated by space.")
+        play_error_sound()
         return
 
+    play_click_sound()
     n = len(dims) - 1
 
     canvas.delete("all")
@@ -89,6 +102,7 @@ def build_draw_steps(i, j, x, y, width):
 
 def draw_next_step(step_idx):
     if step_idx >= len(draw_steps):
+        play_success_sound()
         return
 
     step = draw_steps[step_idx]
