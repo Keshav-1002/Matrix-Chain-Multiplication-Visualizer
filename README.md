@@ -6,15 +6,15 @@ Understanding dynamic programming can sometimes be tricky. This visualizer break
 
   Calculating the Minimum Cost: It efficiently determines the fewest scalar multiplications needed to multiply a chain of matrices.
   
-  Visualizing the Optimal Parenthesization: It then draws the optimal way to group the matrices for multiplication as a tree structure, step by     step. This animation reveals how the subproblems are combined to form the overall solution.
+  Visualizing the Optimal Parenthesization: It then draws the optimal way to group the matrices for multiplication as a tree structure, step by step. This animation reveals how the subproblems are combined to form the overall solution.
   
   Interactive Controls: Adjust the animation speed and easily input new matrix dimensions to see different scenarios.
   
-  Auditory Feedback: Get instant beeps for button clicks, clear error signals for invalid input, and a celebratory sound when the visualization     completes!
+  Auditory Feedback: Get instant beeps for button clicks, clear error signals for invalid input, and a celebratory sound when the visualization completes!
 
 Key Features:
 
-  Dynamic Programming Core: Implements the standard dynamic programming algorithm to find the minimum multiplication cost and the optimal split     points.
+  Dynamic Programming Core: Implements the standard dynamic programming algorithm to find the minimum multiplication cost and the optimal split points.
   
   Intuitive Visualization: Represents matrices as nodes and parenthesizations as a binary tree, making complex structures easy to grasp.
   
@@ -23,4 +23,6 @@ Key Features:
   User-Friendly Interface: A clean Tkinter GUI with clear labels and controls.
   
   Interactive Feedback: Enhances user experience with sounds for actions and errors.
+
+  Reset Anytime: Want to start over with a new set of data ? Hit the Reset button and begin again effortlessly.
   
