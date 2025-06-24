@@ -16,6 +16,28 @@ def play_success_sound():
 
 def play_error_sound():
     winsound.Beep(400, 250)
+    
+def reset_app():
+    global dims, n, dp, s, draw_steps, animation_running
+    play_click_sound()
+    
+    animation_running = False 
+
+    dims = []
+    n = 0
+    dp = []
+    s = []
+    draw_steps = []
+
+    input_entry.config(state="normal")
+    input_entry.delete(0, END) 
+    cost_label.config(text="Minimum Multiplication Cost: ") 
+    canvas.delete("all") 
+    speed_var.set(0.01)
+    speed_slider.set(0.01)
+
+    visualize_button.config(state="normal") 
+    input_entry.focus_set()
 
 def visualize():
     global dims, n, dp, s, draw_steps
@@ -62,7 +84,7 @@ def visualize():
     draw_steps.clear()
 
     total_width = calculate_width(1, n)
-    build_draw_steps(1, n, 1000, 50, total_width)
+    build_draw_steps(1, n, 1100, 50, total_width)
     draw_next_step(0)
 
 def calculate_width(i, j):
@@ -136,24 +158,35 @@ Label(input_frame, text="Enter dimensions (space separated):", bg='white', font=
 input_entry = Entry(input_frame, width=30, font=6)
 input_entry.pack(side=LEFT, padx=5)
 input_entry.focus_set()
-Button(input_frame, text="Visualize", command=visualize, font=8).pack(side=LEFT, padx=5)
+
+visualize_button = Button(input_frame, text="Visualize", command=visualize, font=8)
+visualize_button.pack(side=LEFT, padx=10)
+
+reset_button = Button(input_frame, text="Reset", command=reset_app, font=8)
+reset_button.pack(side=LEFT, padx=10)
 
 speed_frame = Frame(root, bg='white')
 speed_frame.pack(pady=5)
 Label(speed_frame, text="Animation Speed (s):", bg='white', font=6).pack(side=LEFT)
 speed_var = DoubleVar(value=0.01)
-speed_slider = Scale(speed_frame, from_=0.01, to=2.0, resolution=0.1, orient=HORIZONTAL,
+speed_slider = Scale(speed_frame, from_=0.01, to=1.0, resolution=0.1, orient=HORIZONTAL,
                         variable=speed_var)
 speed_slider.pack(side=LEFT)
 
-canvas = Canvas(root, bg='white', width=1000, height=400, scrollregion=(0, 0, 2500, 800))
+cost_frame = Frame(root, bg='white')
+cost_frame.pack(pady=5)
+cost_label = Label(cost_frame, text="Minimum Multiplication Cost: ", bg='white', font=("Arial", 20))
+cost_label.pack(pady=10)
+
+canvas = Canvas(root, bg='white', width=1000, height=400, scrollregion=(0, 0, 2600, 1800))
 canvas.pack(pady=10, fill=BOTH, expand=True)
 
 h_scroll = Scrollbar(root, orient=HORIZONTAL, command=canvas.xview)
 h_scroll.pack(fill=X)
 canvas.config(xscrollcommand=h_scroll.set)
 
-cost_label = Label(root, text="Minimum Multiplication Cost: ", bg='white', font=("Arial", 20))
-cost_label.pack(pady=10)
+v_scroll = Scrollbar(canvas, orient=VERTICAL, command=canvas.yview)
+v_scroll.pack(fill=Y, side=RIGHT)
+canvas.config(yscrollcommand=v_scroll.set)
 
 root.mainloop()
